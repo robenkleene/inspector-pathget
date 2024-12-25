@@ -1,71 +1,61 @@
 // Global variables
-var trackPath = "live_set view selected_track devices";
-var deviceObservers = []; // Array to store live.observer objects
+var trackAPI = null; // LiveAPI object for the track
+var devices = []; // Array to store device IDs
 var deviceNames = []; // Array to store device names
 
-// Initialize the script
-function init() {
-    post("Initializing device monitor\n");
-    observeDevices();
-}
+// Function to handle input in the left inlet (track ID)
+function inlet1(trackID) {
+    if (trackAPI) {
+        trackAPI.property = ""; // Detach observer from the old track
+    }
 
-// Observe the devices in the selected track
-function observeDevices() {
-    clearObservers(); // Clear any existing observers
+    // Set up a new LiveAPI object for the given track ID
+    trackAPI = new LiveAPI(trackID);
 
-    // Create a live.path to access the devices of the selected track
-    var track = new LiveAPI(trackPath);
-
-    // Get the number of devices
-    var deviceCount = track.getcount("devices");
-
-    for (var i = 0; i < deviceCount; i++) {
-        var devicePath = trackPath + " " + i; // Path to the ith device
-        observeDevice(devicePath, i);
+    // Check if the track has devices
+    if (trackAPI.getcount("devices") > 0) {
+        updateDevices();
+    } else {
+        devices = [];
+        deviceNames = [];
+        outlet(0, "No devices found");
     }
 }
 
-// Observe a specific device
-function observeDevice(devicePath, index) {
-    // Create a live.object for the device
-    var device = new LiveAPI(devicePath);
-
-    // Get the current device name
-    var name = device.get("name");
-    deviceNames[index] = name;
-
-    // Create a live.observer to watch for name changes
-    var observer = new LiveAPI(function (args) {
-        if (args[0] === "name") {
-            deviceNames[index] = args[1];
-            updateDeviceList();
-        }
-    });
-    observer.path = devicePath;
-    observer.property = "name";
-
-    deviceObservers.push(observer); // Store the observer
-}
-
-// Update the device list (e.g., display in the Max UI)
-function updateDeviceList() {
-    post("Updated device names: " + deviceNames.join(", ") + "\n");
-}
-
-// Clear all observers
-function clearObservers() {
-    for (var i = 0; i < deviceObservers.length; i++) {
-        deviceObservers[i].property = ""; // Detach the observer
-    }
-    deviceObservers = [];
+// Function to update the list of devices
+function updateDevices() {
+    // Clear the current lists
+    devices = [];
     deviceNames = [];
+
+    // Get the number of devices in the track
+    var deviceCount = trackAPI.getcount("devices");
+
+    // Iterate through devices
+    for (var i = 0; i < deviceCount; i++) {
+        var devicePath = trackAPI.path + " devices " + i;
+        var deviceAPI = new LiveAPI(devicePath);
+
+        // Store the device ID and name
+        devices.push(deviceAPI.id);
+        deviceNames.push(deviceAPI.get("name"));
+    }
+
+    // Output the device names to the left outlet
+    outlet(0, deviceNames);
 }
 
-// Handle when the track changes
-function trackChanged() {
-    post("Track changed, re-observing devices\n");
-    observeDevices();
+// Function to handle input in the right inlet (index value)
+function inlet2(index) {
+    if (index >= 0 && index < devices.length) {
+        // Output the device ID to the right outlet
+        outlet(1, devices[index]);
+    } else {
+        outlet(1, "Invalid index");
+    }
 }
 
-// Call `init` when the script is loaded
-init();
+// Initialization
+function bang() {
+    post("track_devices.js loaded\n");
+}
