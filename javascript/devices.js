@@ -1,4 +1,3 @@
-// Global variables
 var trackAPI = null; // LiveAPI object for the track
 var devices = []; // Array to store device IDs
 var deviceNames = []; // Array to store device names
