@@ -33,6 +33,7 @@ function processTrack(id) {
     devices.push(deviceAPI.id);
     deviceNames.push(deviceAPI.get("name"));
   }
+
   outlet(0, deviceNames);
 }
 
