@@ -23,18 +23,18 @@ function msg_int(value) {
 function processTrack(id) {
   devicesIDs = [];
   deviceNames = [];
-  var trackAPI = new LiveAPI("live_set tracks " + id + " devices");
+  var devicesPath = "live_set tracks " + id + " devices";
+  var trackAPI = new LiveAPI();
   var children = trackAPI.children;
 
   for (var i = 0; i < children.length; i++) {
-    var devicePath = trackAPI.path + " " + i;
-    post("devicePath = " + devicePath + "\n");
+    var devicePath = devicesPath + " " + i;
     var deviceAPI = new LiveAPI(devicePath);
     devicesIDs.push(deviceAPI.id);
-    deviceNames.push(deviceAPI.name);
+    deviceNames.push(deviceAPI.get("name"));
   }
 
-  outlet(0, deviceNames);
+  outlet(0, deviceNames.join(" "));
 }
 
 function processIndex(index) {
