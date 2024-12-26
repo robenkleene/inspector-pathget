@@ -19,6 +19,36 @@
 		"subpatcher_template" : "roben-kleene-max-for-live",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 376.0, 176.0, 160.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"filename" : "inspector_pathget_devices.js",
+						"parameter_enable" : 0
+					}
+,
+					"text" : "js inspector_pathget_devices.js"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 280.0, 312.0, 62.0, 20.0 ],
+					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
+					"text" : "thispatcher"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-1",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -155,7 +185,7 @@
 
 			}
  ],
-		"originid" : "pat-9",
+		"originid" : "pat-29",
 		"dependency_cache" : [  ],
 		"autosave" : 0
 	}
