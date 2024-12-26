@@ -47,8 +47,6 @@ function updateDevices(containerPath) {
 }
 
 function processTrack(id) {
-  deviceIDs = [];
-  deviceNames = [];
   var trackPath = "live_set tracks " + id;
   updateDevices(trackPath);
   outlet(0, deviceNames);
