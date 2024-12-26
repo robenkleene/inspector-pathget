@@ -37,9 +37,9 @@ function processTrack(id) {
 }
 
 function processIndex(index) {
-  var isValidIndex = (index >= 0 && index < devices.length);
+  var isValidIndex = (index >= 0 && index < devicesIDs.length);
   if (!isValidIndex) {
     return;
   }
-  outlet(1, devices[index]);
+  outlet(1, devicesIDs[index]);
 }
