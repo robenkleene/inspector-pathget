@@ -1,4 +1,4 @@
-var devices = [];
+var devicesIDs = [];
 var deviceNames = [];
 
 TRACK_INLET = 0;
@@ -21,15 +21,16 @@ function msg_int(value) {
 }
 
 function processTrack(id) {
-  var trackAPI = new LiveAPI("live_set tracks " + id);
-  var devices = [];
-  var deviceNames = [];
-  var deviceIDs = trackAPI.children;
+  devicesIDs = [];
+  deviceNames = [];
+  var trackAPI = new LiveAPI("live_set tracks " + id + " devices");
+  var children = trackAPI.children;
 
-  for (var i = 0; i < deviceIDs.length; i++) {
-    var devicePath = trackAPI.path + " " + deviceIDs[i];
+  for (var i = 0; i < children.length; i++) {
+    var devicePath = trackAPI.path + " " + i;
+    post("devicePath = " + devicePath + "\n");
     var deviceAPI = new LiveAPI(devicePath);
-    devices.push(deviceAPI.id);
+    devicesIDs.push(deviceAPI.id);
     deviceNames.push(deviceAPI.name);
   }
 
