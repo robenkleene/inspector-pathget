@@ -4,7 +4,6 @@ var deviceNames = [];
 TRACK_INLET = 0;
 INDEX_INLET = 1;
 
-// Inlets & Outlets
 inlets = 2;
 outlets = 2;
 
@@ -37,10 +36,10 @@ function processTrack(id) {
   outlet(0, deviceNames);
 }
 
-function inlet2(index) {
-    if (index >= 0 && index < devices.length) {
-        outlet(1, devices[index]);
-    } else {
-        outlet(1, "Invalid index");
-    }
+function processIndex(index) {
+  var isValidIndex = (index >= 0 && index < devices.length);
+  if (!isValidIndex) {
+    return;
+  }
+  outlet(1, devices[index]);
 }
