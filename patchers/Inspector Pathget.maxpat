@@ -21,9 +21,9 @@
 				"box" : 				{
 					"id" : "obj-4",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 376.0, 176.0, 160.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"filename" : "inspector_pathget_devices.js",
@@ -31,19 +31,6 @@
 					}
 ,
 					"text" : "js inspector_pathget_devices.js"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-2",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 280.0, 312.0, 62.0, 20.0 ],
-					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
-					"text" : "thispatcher"
 				}
 
 			}
@@ -185,8 +172,15 @@
 
 			}
  ],
-		"originid" : "pat-29",
-		"dependency_cache" : [  ],
+		"originid" : "pat-18",
+		"dependency_cache" : [ 			{
+				"name" : "inspector_pathget_devices.js",
+				"bootpath" : "/Users/Shared/Max 9/Packages/inspector-pathget/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+ ],
 		"autosave" : 0
 	}
 
