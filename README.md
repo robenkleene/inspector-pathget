@@ -1,1 +1,1 @@
-# Inspector PathGet
+# Inspector Pathget
