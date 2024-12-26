@@ -24,12 +24,11 @@ function msg_int(value) {
 function processTrack(id) {
   deviceIDs = [];
   deviceNames = [];
-  var devicesPath = "live_set tracks " + id + " devices";
-  var trackAPI = new LiveAPI();
-  var children = trackAPI.children;
-
-  for (var i = 0; i < children.length; i++) {
-    var devicePath = devicesPath + " " + i;
+  var trackPath = "live_set tracks " + id;
+  var trackAPI = new LiveAPI(trackPath);
+  var deviceCount = trackAPI.getcount("devices");
+  for (var i = 0; i < deviceCount; i++) {
+    var devicePath = trackPath + " devices " + i;
     var deviceAPI = new LiveAPI(devicePath);
     deviceIDs.push(deviceAPI.id);
     deviceNames.push(String(deviceAPI.get("name")));
