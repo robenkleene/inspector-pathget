@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 116.0, 190.0, 927.0, 512.0 ],
+		"rect" : [ 512.0, 256.0, 927.0, 512.0 ],
 		"openinpresentation" : 1,
 		"default_fontsize" : 10.0,
 		"default_fontname" : "Arial Bold",
@@ -19,6 +19,51 @@
 		"objectsnaponopen" : 0,
 		"subpatcher_template" : "roben-kleene-max-for-live",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "textedit",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 520.0, 216.0, 100.0, 50.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 8.0, 32.0, 208.0, 128.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "live.text",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 240.0, 32.0, 44.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 8.0, 8.0, 44.0, 15.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "val1", "val2" ],
+							"parameter_longname" : "Scan",
+							"parameter_mmax" : 1,
+							"parameter_modmode" : 0,
+							"parameter_osc_name" : "<default>",
+							"parameter_shortname" : "Scan",
+							"parameter_type" : 2
+						}
+
+					}
+,
+					"text" : "Scan",
+					"texton" : "Scan",
+					"varname" : "Scan"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-22",
 					"maxclass" : "newobj",
@@ -89,7 +134,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 256.0, 456.0, 100.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 8.0, 32.0, 100.0, 20.0 ]
+					"presentation_rect" : [ 56.0, 8.0, 160.0, 20.0 ]
 				}
 
 			}
@@ -102,34 +147,6 @@
 					"outlettype" : [ "", "", "", "int", "", "int" ],
 					"patching_rect" : [ 176.0, 224.0, 151.0, 20.0 ],
 					"text" : "unpack sym sym sym 0 sym 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-3",
-					"maxclass" : "live.button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 256.0, 32.0, 15.0, 15.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 8.0, 8.0, 15.0, 15.0 ],
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "live.button",
-							"parameter_mmax" : 1,
-							"parameter_modmode" : 0,
-							"parameter_osc_name" : "<default>",
-							"parameter_shortname" : "live.button",
-							"parameter_type" : 2
-						}
-
-					}
-,
-					"varname" : "live.button"
 				}
 
 			}
@@ -229,6 +246,13 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-20", 0 ],
 					"source" : [ "obj-12", 1 ]
 				}
@@ -306,13 +330,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-7", 0 ],
-					"source" : [ "obj-3", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
 					"source" : [ "obj-4", 0 ]
 				}
@@ -333,9 +350,9 @@
 
 			}
  ],
-		"originid" : "pat-54",
+		"originid" : "pat-160",
 		"parameters" : 		{
-			"obj-3" : [ "live.button", "live.button", 0 ],
+			"obj-1" : [ "Scan", "Scan", 0 ],
 			"parameterbanks" : 			{
 				"0" : 				{
 					"index" : 0,
