@@ -33,7 +33,8 @@ function processTrack(id) {
     var deviceAPI = new LiveAPI(devicePath);
     deviceIDs.push(deviceAPI.id);
     deviceNames.push(String(deviceAPI.get("name")));
-    devicePaths.push(deviceAPI.path);
+    devicePaths.push(String(deviceAPI.path).split('"')[1]);
+    post("deviceAPI.path = " + deviceAPI.path + "\n");
   }
   outlet(0, deviceNames);
 }
