@@ -21,37 +21,37 @@ function msg_int(value) {
   }
 }
 
+function updateDevices(containerPath) {
+  var api = new LiveAPI(containerPath);
+  var deviceCount = api.getcount("devices");
+  for (var i = 0; i < deviceCount; i++) {
+    var devicePath = containerPath + " devices " + i;
+    var deviceAPI = new LiveAPI(devicePath);
+    deviceIDs.push(deviceAPI.id);
+    deviceNames.push(String(deviceAPI.get("name")));
+    devicePaths.push(devicePath);
+
+    if (deviceAPI.get("can_have_chains") > 0) {
+      var chainCount = deviceAPI.getcount("chains");
+      for (var j = 0; j < chainCount; j++) {
+        var chainsPath = devicePath + " chains " + j;
+        updateDevices(chainsPath);
+      }
+      var returnChainCount = deviceAPI.getcount("return_chains");
+      for (var k = 0; k < returnChainCount; k++) {
+        var returnChainsPath = devicePath + " return_chains " + k;
+        updateDevices(returnChainsPath);
+      }
+    }
+  }
+}
+
 function processTrack(id) {
   deviceIDs = [];
   deviceNames = [];
   var trackPath = "live_set tracks " + id;
   updateDevices(trackPath);
   outlet(0, deviceNames);
-}
-
-function updateDevices(path) {
-  var api = new LiveAPI(path);
-  var deviceCount = api.getcount("devices");
-  for (var i = 0; i < deviceCount; i++) {
-    var devicePath = trackPath + " devices " + i;
-    var deviceAPI = new LiveAPI(devicePath);
-    deviceIDs.push(deviceAPI.id);
-    deviceNames.push(String(deviceAPI.get("name")));
-    // Strip quotes
-    var path = String(deviceAPI.path).split('"')[1];
-    devicePaths.push(path);
-
-    if (deviceAPI.get("can_have_chains") > 0) {
-      var chainCount = deviceAPI.getcount("chains");
-      for (let j = 0; j < chainCount; j++) {
-        updateDevices(path + " chains " + j);
-      }
-      var returnChainCount = deviceAPI.getcount("return_chains");
-      for (let k = 0; k < returnChainCount; k++) {
-        updateDevices(path + " return_chains " + k);
-      }
-    }
-  }
 }
 
 function processIndex(index) {
