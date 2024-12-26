@@ -52,7 +52,6 @@ function updateDevices(path) {
       }
     }
   }
-  outlet(0, deviceNames);
 }
 
 function processIndex(index) {
